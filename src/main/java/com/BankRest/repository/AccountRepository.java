@@ -1,5 +1,9 @@
 package com.BankRest.repository;
 
-public interface AccountRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.BankRest.entity.Account;
+
+public interface AccountRepository extends JpaRepository<Account, Long> {
 
 }
