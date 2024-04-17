@@ -11,25 +11,50 @@ import com.BankRest.service.AccountService;
 @Service
 public class AccountServiceImpl implements AccountService {
 	private AccountRepository accountRepository;
-	
 
 	public AccountServiceImpl(AccountRepository accountRepository) {
 		this.accountRepository = accountRepository;
 	}
+
 	@Override
 	public AccountDto createAccount(AccountDto accountDto) {
 		Account account = AccountMapper.mapToAccount(accountDto);
 		Account savedAccount = accountRepository.save(account);
 		return AccountMapper.maptoAccountDto(savedAccount);
-		
+
 	}
+
 	@Override
 	public AccountDto getAccountById(Long Id) {
 		// TODO Auto-generated method stub
-		Account account = accountRepository
-				.findById(Id)
-				.orElseThrow(()-> new RuntimeException("Account Doesn't Exists"));
+		Account account = accountRepository.findById(Id)
+				.orElseThrow(() -> new RuntimeException("Account Doesn't Exists"));
 		return AccountMapper.maptoAccountDto(account);
 	}
 
+	@Override
+	public AccountDto deposit(Long id, double amount) {
+		// TODO Auto-generated method stub
+
+		Account account = accountRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Account Doesn't Exists"));
+		double total = account.getBalance() + amount;
+		account.setBalance(total);
+		Account savedAccount = accountRepository.save(account);
+		return AccountMapper.maptoAccountDto(savedAccount);
+	}
+
+	public AccountDto withdrawl(Long id, double amount) {
+		Account account = accountRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Account Doesn't Exists"));
+		if(account.getBalance() < amount) {
+			throw new  RuntimeException("Insufficient Balance!");
+		}
+		
+		
+		double total = account.getBalance() - amount;
+		account.setBalance(total);
+		Account savedAccount = accountRepository.save(account);
+		return AccountMapper.maptoAccountDto(savedAccount);
+	}
 }
