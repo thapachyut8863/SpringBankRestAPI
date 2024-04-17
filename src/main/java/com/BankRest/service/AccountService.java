@@ -1,5 +1,7 @@
 package com.BankRest.service;
 
+import java.util.List;
+
 import com.BankRest.dto.AccountDto;
 
 public interface AccountService {
@@ -7,5 +9,6 @@ public interface AccountService {
 	AccountDto getAccountById(Long Id);
 	AccountDto deposit(Long id , double amount);
 	AccountDto withdrawl(Long id, double amount);
+	List<AccountDto> getAllAccounts();
 
 }

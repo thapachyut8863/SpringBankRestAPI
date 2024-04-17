@@ -1,5 +1,6 @@
 package com.BankRest.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,13 @@ public class AccountController {
 		Double amount = request.get("amount");
 		AccountDto accountDto = accountService.withdrawl(id, amount);
 		return ResponseEntity.ok(accountDto);
+		
+	}
+	//getAll account
+	
+	public ResponseEntity<List<AccountDto>> getAllAccounts(){
+		List<AccountDto> accounts = accountService.getAllAccounts();
+		return ResponseEntity.ok(accounts);
 		
 	}
 	
