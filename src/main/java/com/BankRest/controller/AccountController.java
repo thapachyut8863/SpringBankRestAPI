@@ -53,7 +53,7 @@ public class AccountController {
 		
 	}
 	//getAll account
-	
+	@GetMapping
 	public ResponseEntity<List<AccountDto>> getAllAccounts(){
 		List<AccountDto> accounts = accountService.getAllAccounts();
 		return ResponseEntity.ok(accounts);
