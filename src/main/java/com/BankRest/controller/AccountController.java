@@ -61,6 +61,7 @@ public class AccountController {
 		
 	}
 	//delete account RestAPI
+	//test
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteAccount(@PathVariable Long id) {
 		accountService.deleteAccount(id);
